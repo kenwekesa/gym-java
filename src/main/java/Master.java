@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Master {
 
@@ -32,7 +33,7 @@ public class Master {
                 break;
             case 2:
                 System.out.println("Online user");
-                enrolUser();
+                onlineUsers();
                 break;
             case 3:
                 System.exit(0);
@@ -46,15 +47,58 @@ public class Master {
 
     }
 
+    public static void onlineUsers()
+    {
+        System.out.println("-------------Online Users------------------\n[1] Enrol \n[2] View all users");
+        int choice = input.nextInt();
+
+        switch (choice)
+        {
+            case 1:
+                enrolUser();
+                break;
+            case 2:
+                viewUsers();
+                break;
+            default:
+                System.out.println("Wrong choice, choose acording to available ooptions");
+                onlineUsers();
+                break;
+        }
+    }
+
+    public static void viewUsers()
+    {
+        ArrayList<User> user_objects_list = new ArrayList();
+
+        user_objects_list = deserializeUser();
+
+        for(User user: user_objects_list)
+        {
+            System.out.println("Username: "+user.getName()+"\nEmail Address: "+user.getEmail()+"\n");
+        }
+
+    }
     public static void enrolUser()
     {
+        ArrayList<User> list = deserializeUser();
+        ArrayList<Integer> id_list = new ArrayList<Integer>();
+        for(User user: list)
+        {
+            id_list.add(user.getId());
+        }
         int id;
-        String name, address, city, email;
+        String name, address, city, email,plan;
 
 
         System.out.println("Enter the user ID: ");
         id = input.nextInt();
-
+        if(id_list.contains(id))
+        {
+            System.out.println("User with that ID already exists.");
+            enrolUser();
+            System.exit(0);
+        }
         System.out.println(("Enter the user name: "));
         name = input.next();
 
@@ -67,8 +111,18 @@ public class Master {
         System.out.println("Enter the user city: ");
         city = input.next();
 
+        System.out.println("Choose plan: ");
+        System.out.println("Plans available is as follows: \n" +
+                "[1] Basic plan - $9.99/month \n" +
+                "\t->Equipments \n" +
+                "\t->Guests - $10 per session - only equipments\n" +
+                "[2] Fox Plan - 19.99/month\n" +
+                "\t->Equipments\n" +
+                "\t->Guest Priviledges\n" +
+                "\t->Free group fitness classes");
+        plan = choosePlan();
         //Handling saving the
-        User user = new User(id,name,address,city,email);
+        User user = new User(id,name,address,city,email,plan);
         saveUser(user);
 
     }
@@ -82,8 +136,8 @@ public class Master {
         switch (action){
             case 1:
                 //SAve
-                //serializeUser(user);
-                deserializeUser();
+               serializeUser(user);
+                //deserializeUser();
                 break;
             case 2:
                 //cancel
@@ -98,38 +152,65 @@ public class Master {
 
     public static void serializeUser(User user)
     {
+        ArrayList<User> users_list = new ArrayList();
+
+        users_list = deserializeUser();
+
         try {
+            users_list.add(user);
             FileOutputStream fileOut =
                     new FileOutputStream("users.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(user);
+            out.writeObject(users_list);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved");
+            System.out.printf("Saved successfully!");
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
-    public static void deserializeUser()
+    public static ArrayList<User> deserializeUser()
     {
-        User user;
+        ArrayList<User> user_list= new ArrayList();
         try {
             FileInputStream fileIn = new FileInputStream("users.ser");
             ObjectInputStream object_input = new ObjectInputStream(fileIn);
-            user =  (User) object_input.readObject();
+            user_list =  (ArrayList<User>) object_input.readObject();
             object_input.close();
             fileIn.close();
         } catch (IOException i) {
-            i.printStackTrace();
-            return;
+            //i.printStackTrace();
+            System.out.println("No records found, none might might have been created before.");
+            return user_list;
         } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
+            System.out.println("Usere class not found");
             c.printStackTrace();
-            return;
+            return user_list;
         }
 
-        System.out.println("Deserialized Employee...");
-        System.out.println("Name: " + user.getName());
+        System.out.println("Deserialized users...");
+
+
+        return user_list;
+    }
+
+    public static String choosePlan()
+    {
+      System.out.println("Choose plan: ");
+        int choice = input.nextInt();
+
+        switch (choice)
+        {
+            case 1:
+                return "Basic";
+
+            case 2:
+                return "Fox";
+            default:
+                System.out.println("Wrong choice, kindly choose from available choices");
+                choosePlan();
+        }
+        return null;
     }
 }
