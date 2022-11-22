@@ -11,15 +11,15 @@ public class Master {
 
         System.out.println("-------------RFFC GYMN-----------------" +
                 "\n\nSelect one from the optionss below: \n" +
-                "[1] GYNM STAFFR\n" +
-                "[2] ONLINE USERS\n" +
+                "[1] GYNM STAFF\n" +
+                "[2] ONLINE USER\n" +
                 "[3] CLOSE");
 
-        getUserChoice();
+        getMemberChoice();
 
 
     }
-    public static void getUserChoice()
+    public static void getMemberChoice()
     {
         //for keybaord input
         Scanner keyboard = new Scanner(System.in);
@@ -32,185 +32,80 @@ public class Master {
                 System.out.println("gym worker");
                 break;
             case 2:
-                System.out.println("Online user");
-                onlineUsers();
+                onlineMembers();
                 break;
             case 3:
                 System.exit(0);
 
             default:
                 System.out.println("Wrong choice, kindly choose from existing options");
-                getUserChoice();
+                getMemberChoice();
 
 
         }
 
     }
 
-    public static void onlineUsers()
+    public static void onlineMembers()
     {
-        System.out.println("-------------Online Users------------------\n[1] Enrol \n[2] View all users");
+        Member member = new Member();
+        System.out.println("-------------Online Members------------------\n[1] Signup \n[2] Enrol for class" +
+                "\n[3] Switch plan \n[4] Cancel plan \n[5] View schedules \n[6] Request for One to One class");
         int choice = input.nextInt();
 
         switch (choice)
         {
             case 1:
-                enrolUser();
+                member.signupMember();
                 break;
             case 2:
-                viewUsers();
+                member.enrolMember();
+                break;
+            case 3:
+                member.switchPlan();
+                break;
+            case 4:
+                member.cancelPlan();
                 break;
             default:
-                System.out.println("Wrong choice, choose acording to available ooptions");
-                onlineUsers();
+                System.out.println("Wrong choice, choose acording to available options");
+                onlineMembers();
                 break;
         }
     }
 
-    public static void viewUsers()
+
+
+
+
+
+
+
+
+
+    public static void generateSchedules()
     {
-        ArrayList<User> user_objects_list = new ArrayList();
-
-        user_objects_list = deserializeUser();
-
-        for(User user: user_objects_list)
-        {
-            System.out.println("Username: "+user.getName()+"\nEmail Address: "+user.getEmail()+"\n");
-        }
-
+        //Schedules be done her enah
     }
-    public static void enrolUser()
+
+    public void manageSales()
     {
-        ArrayList<User> list = deserializeUser();
-        ArrayList<Integer> id_list = new ArrayList<Integer>();
-        for(User user: list)
-        {
-            id_list.add(user.getId());
-        }
-        int id;
-        String name, address, city, email,plan;
-
-
-        System.out.println("Enter the user ID: ");
-        id = input.nextInt();
-        if(id_list.contains(id))
-        {
-            System.out.println("User with that ID already exists.");
-            enrolUser();
-            System.exit(0);
-        }
-        System.out.println(("Enter the user name: "));
-        name = input.next();
-
-        System.out.println("Enter the user address");
-        address = input.next();
-
-        System.out.println("Enter the user Email address: ");
-        email = input.next();
-
-        System.out.println("Enter the user city: ");
-        city = input.next();
-
-        System.out.println("Choose plan: ");
-        System.out.println("Plans available is as follows: \n" +
-                "[1] Basic plan - $9.99/month \n" +
-                "\t->Equipments \n" +
-                "\t->Guests - $10 per session - only equipments\n" +
-                "[2] Fox Plan - 19.99/month\n" +
-                "\t->Equipments\n" +
-                "\t->Guest Priviledges\n" +
-                "\t->Free group fitness classes");
-        plan = choosePlan();
-        //Handling saving the
-        User user = new User(id,name,address,city,email,plan);
-        saveUser(user);
 
     }
 
-    public static void saveUser(User user)
+    public void awardPoints()
     {
-
-        System.out.println("Press 1 to save and 2 to Cancel the operation:\n[1] SAVE \n[2] CANCEL");
-        int action= input.nextInt();
-
-        switch (action){
-            case 1:
-                //SAve
-               serializeUser(user);
-                //deserializeUser();
-                break;
-            case 2:
-                //cancel
-                System.out.println("Cancelled"+user);
-                break;
-            default:
-                System.out.println("Please select from the provided options!\n\n");
-                saveUser(user);
-                break;
-        }
+        //Award points
     }
 
-    public static void serializeUser(User user)
+    public void inventory()
     {
-        ArrayList<User> users_list = new ArrayList();
-
-        users_list = deserializeUser();
-
-        try {
-            users_list.add(user);
-            FileOutputStream fileOut =
-                    new FileOutputStream("users.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(users_list);
-            out.close();
-            fileOut.close();
-            System.out.printf("Saved successfully!");
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
+        //Manage inventory here
     }
 
-    public static ArrayList<User> deserializeUser()
+    public void scheduleOnetoone()
     {
-        ArrayList<User> user_list= new ArrayList();
-        try {
-            FileInputStream fileIn = new FileInputStream("users.ser");
-            ObjectInputStream object_input = new ObjectInputStream(fileIn);
-            user_list =  (ArrayList<User>) object_input.readObject();
-            object_input.close();
-            fileIn.close();
-        } catch (IOException i) {
-            //i.printStackTrace();
-            System.out.println("No records found, none might might have been created before.");
-            return user_list;
-        } catch (ClassNotFoundException c) {
-            System.out.println("Usere class not found");
-            c.printStackTrace();
-            return user_list;
-        }
 
-        System.out.println("Deserialized users...");
-
-
-        return user_list;
     }
 
-    public static String choosePlan()
-    {
-      System.out.println("Choose plan: ");
-        int choice = input.nextInt();
-
-        switch (choice)
-        {
-            case 1:
-                return "Basic";
-
-            case 2:
-                return "Fox";
-            default:
-                System.out.println("Wrong choice, kindly choose from available choices");
-                choosePlan();
-        }
-        return null;
-    }
 }

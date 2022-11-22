@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc4d1023-1904-46cd-9652-16272205c82e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/enrolment.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/members.ser" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Enrol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Master.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Master.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Master.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Master.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/User.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
