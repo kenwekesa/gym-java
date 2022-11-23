@@ -30,6 +30,9 @@ public class Master {
         {
             case 1:
                 System.out.println("gym worker");
+                GymClass g =  new GymClass();
+                g.generateSchedule();
+                g.displaySchedule();
                 break;
             case 2:
                 onlineMembers();
