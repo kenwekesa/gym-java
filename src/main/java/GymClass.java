@@ -51,6 +51,9 @@ public class GymClass implements java.io.Serializable{
         tutors.add("Lucy");
         tutors.add("Tifanny");
         tutors.add("Wanjala");
+        tutors.add("Wanjala");
+        tutors.add("Ashley");
+        tutors.add("Moma");
 
         classNames.add("Yoga");
         classNames.add("Cardio");
@@ -58,9 +61,12 @@ public class GymClass implements java.io.Serializable{
 
         ArrayList<GymClass> classes_list = new ArrayList();
 
-       for(int i = 0;i<=24;i++)
+       for(int i = 0;i<=42;i++)
        {
-           GymClass gym_class = new GymClass(i+1, classNames.get(0 + (int)(Math.random() * ((2 - 0) + 1))),tutors.get(0 + (int)(Math.random() * ((4 - 0) + 1))));
+           /*
+                *Randomly generate a class on the schedule
+            */
+           GymClass gym_class = new GymClass(i+1, classNames.get(0 + (int)(Math.random() * ((2 - 0) + 1))),tutors.get(0 + (int)(Math.random() * ((7 - 0) + 1))));
 
 
            classes_list.add(gym_class);
@@ -85,7 +91,7 @@ public class GymClass implements java.io.Serializable{
             out.writeObject(schedule);
             out.close();
             fileOut.close();
-            System.out.printf("Saved successfully!");
+            System.out.printf("Schedule generated successfully!");
         } catch (IOException i) {
             i.printStackTrace();
         }
@@ -102,7 +108,7 @@ public class GymClass implements java.io.Serializable{
             fileIn.close();
         } catch (IOException i) {
             //i.printStackTrace();
-            System.out.println("No records found, none might might have been created before.");
+            System.out.println("No class schedule available yet");
             return classList;
         } catch (ClassNotFoundException c) {
             System.out.println("Membere class not found");
@@ -122,7 +128,7 @@ public class GymClass implements java.io.Serializable{
     {
         ArrayList<GymClass> schedule =  deserializeSchedule();
 
-        System.out.println("-----------WEEK 1----------------" +
+        System.out.println("-----------THIS MONTH CLASS SCHEDULE----------------" +
                         "\nMONDAY\n" +
                         "\t-  8.00 - 9.00 am \t\t"+schedule.get(0).class_name+"("+schedule.get(0).getTutor()+")\n" +
                         "\t-  9.00 - 10.00 am : No Class\n"+
@@ -156,6 +162,56 @@ public class GymClass implements java.io.Serializable{
                 "\t-  5.00 - 6.00 pm \t\t"+schedule.get(16).class_name+"("+schedule.get(16).getTutor()+")\n" +
                 "\t-  7.00 - 8.00 pm \t\t"+schedule.get(17).class_name+"("+schedule.get(17).getTutor()+")\n" +
                 "\t-  8.00 - 9.00 pm \t\t"+schedule.get(18).class_name+"("+schedule.get(18).getTutor()+")\n"
+
+        );
+
+        System.out.println("\n\n-" +
+                "\nTHURSDAY\n" +
+                "\t-  8.00 - 9.00 am \t\t"+schedule.get(19).class_name+"("+schedule.get(19).getTutor()+")\n" +
+                "\t-  9.00 - 10.00 am :\t\t"+schedule.get(20).class_name+"("+schedule.get(20).getTutor()+")\n" +
+                "\t-  11.00 - 12.00 am \t\t"+schedule.get(21).class_name+"("+schedule.get(21).getTutor()+")\n" +
+                "\t-  2.00 - 3.00 pm \t\t"+schedule.get(22).class_name+"("+schedule.get(22).getTutor()+")\n" +
+                "\t-  5.00 - 6.00 pm \t\t"+schedule.get(23).class_name+"("+schedule.get(23).getTutor()+")\n" +
+                "\t-  7.00 - 8.00 pm \t\t"+schedule.get(24).class_name+"("+schedule.get(24).getTutor()+")\n" +
+                "\t-  8.00 - 9.00 pm \t\t"+schedule.get(25).class_name+"("+schedule.get(25).getTutor()+")\n"
+
+        );
+
+        System.out.println("\n\n-" +
+                "\nFRIDAY\n" +
+                "\t-  8.00 - 9.00 am \t\t"+schedule.get(26).class_name+"("+schedule.get(26).getTutor()+")\n" +
+                "\t-  9.00 - 10.00 am :\t\t"+schedule.get(27).class_name+"("+schedule.get(27).getTutor()+")\n" +
+                "\t-  11.00 - 12.00 am \t\t"+schedule.get(28).class_name+"("+schedule.get(28).getTutor()+")\n" +
+                "\t-  2.00 - 3.00 pm \t\t"+schedule.get(29).class_name+"("+schedule.get(29).getTutor()+")\n" +
+                "\t-  5.00 - 6.00 pm \t\t"+schedule.get(30).class_name+"("+schedule.get(30).getTutor()+")\n" +
+                "\t-  7.00 - 8.00 pm \t\t"+schedule.get(31).class_name+"("+schedule.get(31).getTutor()+")\n" +
+                "\t-  8.00 - 9.00 pm \t\t"+schedule.get(32).class_name+"("+schedule.get(32).getTutor()+")\n"
+
+        );
+
+
+        System.out.println("\n\n-" +
+                "\nSATURDAY\n" +
+                "\t-  8.00 - 9.00 am \t\t"+schedule.get(33).class_name+"("+schedule.get(33).getTutor()+")\n" +
+                "\t-  9.00 - 10.00 am :\t\t"+schedule.get(34).class_name+"("+schedule.get(34).getTutor()+")\n" +
+                "\t-  11.00 - 12.00 am \t\t"+schedule.get(35).class_name+"("+schedule.get(35).getTutor()+")\n" +
+                "\t-  2.00 - 3.00 pm \t\t"+schedule.get(36).class_name+"("+schedule.get(36).getTutor()+")\n" +
+                "\t-  5.00 - 6.00 pm \t\t"+schedule.get(37).class_name+"("+schedule.get(37).getTutor()+")\n" +
+                "\t-  7.00 - 8.00 pm \t\tNo class\n"+
+                "\t-  8.00 - 9.00 pm \t\tNo Class"
+
+        );
+
+
+        System.out.println("\n\n-" +
+                "\nSUNDAY\n" +
+                "\t-  8.00 - 9.00 am \t\t"+schedule.get(38).class_name+"("+schedule.get(38).getTutor()+")\n" +
+                "\t-  9.00 - 10.00 am :\t\t"+schedule.get(39).class_name+"("+schedule.get(39).getTutor()+")\n" +
+                "\t-  11.00 - 12.00 am \t\t"+schedule.get(40).class_name+"("+schedule.get(40).getTutor()+")\n" +
+                "\t-  2.00 - 3.00 pm \t\t"+schedule.get(41).class_name+"("+schedule.get(41).getTutor()+")\n" +
+                "\t-  5.00 - 6.00 pm \t\t"+schedule.get(42).class_name+"("+schedule.get(42).getTutor()+")\n" +
+                "\t-  7.00 - 8.00 pm \t\tNo Class\n"+
+                "\t-  8.00 - 9.00 pm \t\tNo class"
 
         );
 
