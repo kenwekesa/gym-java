@@ -269,7 +269,7 @@ public class Member implements java.io.Serializable{
         return null;
     }
 
-    public static void viewMembers()
+    public void viewMembers()
     {
         ArrayList<Member> member_objects_list = new ArrayList();
 
